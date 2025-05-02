@@ -13,10 +13,10 @@ def divide(a, b):
     return a / b
 
 if __name__ == "__main__":
-    x = 10
+    x = 1
     y = 5
 
     print("Addition:", add(x, y))
-    print("Subtraction:", subtract(x, y))
+    print("Subtraction:", subtract(x, a))
     print("Multiplication:", multiply(x, z))
     print("Division:", divide(x, z))
