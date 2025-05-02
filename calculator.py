@@ -18,5 +18,5 @@ if __name__ == "__main__":
 
     print("Addition:", add(x, y))
     print("Subtraction:", subtract(x, y))
-    print("Multiplication:", multiply(x, y))
-    print("Division:", divide(x, y))
+    print("Multiplication:", multiply(x, z))
+    print("Division:", divide(x, z))
