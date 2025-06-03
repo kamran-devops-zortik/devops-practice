@@ -37,14 +37,14 @@ jobs:
       - name: Slack Notification on Failure
         if: failure()
         uses: act10ns/slack@v2
-        env:
-          REPO: ${{ github.repository }}
-          BRANCH: ${{ github.ref_name }}
-          SHA: ${{ github.sha }}
-          ACTOR: ${{ github.actor }}
-          RUN_ID: ${{ github.run_id }}
-          FAILED_STEP: ${{ env.FAILED_STEP || 'Unknown' }}
         with:
           channel: '#front-end-dashboard'
           status: failure
-          message: ":rotating_light: *CI/CD Pipeline Failed*\n*Repository:* $REPO\n*Branch:* $BRANCH\n*Commit:* <$REPO/commit/$SHA|$SHA>\n*Triggered by:* $ACTOR\n*Failed Step:* $FAILED_STEP\n*Run:* https://github.com/$REPO/actions/runs/$RUN_ID"
+          message: |
+            :rotating_light: *CI/CD Pipeline Failed*
+            *Repository:* ${{ github.repository }}
+            *Branch:* ${{ github.ref_name }}
+            *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
+            *Triggered by:* ${{ github.actor }}
+            *Failed Step:* ${{ env.FAILED_STEP || 'Unknown' }}
+            *Run:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
