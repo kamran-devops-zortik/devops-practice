@@ -47,7 +47,7 @@ jobs:
         with:
           channel: '#front-end-dashboard'
           status: failure
-          text: |
+          message: |
             🚨 *CI/CD Pipeline Failed*
             *Repository:* $REPO
             *Branch:* $BRANCH
