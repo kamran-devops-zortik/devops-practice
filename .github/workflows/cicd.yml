@@ -26,6 +26,14 @@ jobs:
       - name: Build with Maven
         id: build_step
         run: mvn install -f MyWebApp/pom.xml
+        continue-on-error: true
+
+      - name: Check failure cause
+        id: detect_fail
+        run: |
+          if [ "${{ steps.build_step.outcome }}" == "failure" ]; then
+            echo "FAILED_STEP=Build with Maven" >> $GITHUB_ENV
+          fi
 
       - name: Slack Notification on Failure
         if: failure()
@@ -39,9 +47,5 @@ jobs:
             *Branch:* `${{ github.ref_name }}`
             *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
             *Triggered by:* `${{ github.actor }}`
-            *Workflow:* `${{ github.workflow }}`
-            *Job:* `${{ github.job }}`
-            *Run URL:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>
-
-            ❌ *Reason:* At least one step failed (check logs for details).
-
+            *Failed Step:* `${{ env.FAILED_STEP || 'Unknown' }}`
+            *Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>
