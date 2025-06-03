@@ -28,7 +28,7 @@ jobs:
         run: mvn install -f MyWebApp/pom.xml
 
       - name: Slack Notification on Failure
-        if: failure()
+        if: failure()  # ✅ only runs if any previous step failed
         uses: act10ns/slack@v2
         with:
           channel: '#front-end-dashboard'
@@ -38,7 +38,7 @@ jobs:
             *Repository:* ${{ github.repository }}
             *Branch:* ${{ github.ref_name }}
             *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
-            *Failed Step:* `${{ failure() && steps.build_step.name || 'Unknown Step' }}`
-            *Actor:* ${{ github.actor }}
+            *Triggered by:* ${{ github.actor }}
             *Workflow:* ${{ github.workflow }}
             *Job:* ${{ github.job }}
+            ❗ Check logs to identify failed step.
