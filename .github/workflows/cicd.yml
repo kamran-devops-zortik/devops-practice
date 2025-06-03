@@ -34,21 +34,17 @@ jobs:
             echo "FAILED_STEP=Build with Maven" >> $GITHUB_ENV
           fi
 
-      - name: Format Slack message
-        id: format_msg
-        run: |
-          echo "SLACK_MESSAGE=:rotating_light: *CI/CD Pipeline Failed*" >> $GITHUB_ENV
-          echo "*Repository:* ${{ github.repository }}" >> $GITHUB_ENV
-          echo "*Branch:* ${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "*Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>" >> $GITHUB_ENV
-          echo "*Triggered by:* ${{ github.actor }}" >> $GITHUB_ENV
-          echo "*Failed Step:* ${{ env.FAILED_STEP || 'Unknown' }}" >> $GITHUB_ENV
-          echo "*Run:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
-    
       - name: Slack Notification on Failure
         if: failure()
         uses: act10ns/slack@v2
         with:
           channel: '#front-end-dashboard'
           status: failure
-          message: ${{ env.SLACK_MESSAGE }}
+          message: |
+            :rotating_light: *CI/CD Pipeline Failed*
+            *Repository:* ${{ github.repository }}
+            *Branch:* ${{ github.ref_name }}
+            *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
+            *Triggered by:* ${{ github.actor }}
+            *Failed Step:* ${{ env.FAILED_STEP || 'Unknown' }}
+            *Run:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
