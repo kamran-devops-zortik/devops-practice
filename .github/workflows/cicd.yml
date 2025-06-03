@@ -28,17 +28,20 @@ jobs:
         run: mvn install -f MyWebApp/pom.xml
 
       - name: Slack Notification on Failure
-        if: failure()  # ✅ only runs if any previous step failed
+        if: failure()
         uses: act10ns/slack@v2
         with:
           channel: '#front-end-dashboard'
           status: failure
           text: |
-            🚨 *Pipeline Failed*
-            *Repository:* ${{ github.repository }}
-            *Branch:* ${{ github.ref_name }}
+            🚨 *CI/CD Pipeline Failed*
+            *Repository:* `${{ github.repository }}`
+            *Branch:* `${{ github.ref_name }}`
             *Commit:* <https://github.com/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>
-            *Triggered by:* ${{ github.actor }}
-            *Workflow:* ${{ github.workflow }}
-            *Job:* ${{ github.job }}
-            ❗ Check logs to identify failed step.
+            *Triggered by:* `${{ github.actor }}`
+            *Workflow:* `${{ github.workflow }}`
+            *Job:* `${{ github.job }}`
+            *Run URL:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>
+
+            ❌ *Reason:* At least one step failed (check logs for details).
+
