@@ -26,7 +26,6 @@ jobs:
       - name: Build with Maven
         id: build_step
         run: mvn install -f MyWebApp/pom.xml
-        continue-on-error: true
 
       - name: Check failure cause
         id: detect_fail
