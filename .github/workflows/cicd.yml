@@ -47,11 +47,4 @@ jobs:
         with:
           channel: '#front-end-dashboard'
           status: failure
-          message: |
-            🚨 *CI/CD Pipeline Failed*
-            *Repository:* $REPO
-            *Branch:* $BRANCH
-            *Commit:* <https://github.com/$REPO/commit/$SHA|$SHA>
-            *Triggered by:* $ACTOR
-            *Failed Step:* $FAILED_STEP
-            *Run:* <https://github.com/$REPO/actions/runs/$RUN_ID>
+          message: ":rotating_light: *CI/CD Pipeline Failed*\n*Repository:* $REPO\n*Branch:* $BRANCH\n*Commit:* <$REPO/commit/$SHA|$SHA>\n*Triggered by:* $ACTOR\n*Failed Step:* $FAILED_STEP\n*Run:* https://github.com/$REPO/actions/runs/$RUN_ID"
